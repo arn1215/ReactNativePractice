@@ -1,7 +1,97 @@
 import * as React from 'react';
 import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+
+
+
+
+
+
+// NAVIGATION COMPONENTS
+const Tab = createBottomTabNavigator();
+
+const TabNavigation = () => {
+  return (
+    <Tab.Navigator screenOptions={{
+      
+      tabBarStyle: {
+        backgroundColor: '#A3BAC3',
+        color: 'white',
+        
+      },
+      headerShown: false
+    }}
+    >
+      <Tab.Screen name='Home' component={HomeScreen}  />
+      <Tab.Screen name='Projects' component={ProjectsScreen} />
+      <Tab.Screen name='Messages' component={MessagesScreen} />
+      <Tab.Screen name='Payments' component={PaymentsScreen} />
+    </Tab.Navigator>
+  )
+}
+
+
+// SCREENS
+
+const HomeScreen = () => (
+  <ScrollView style={{ backgroundColor: "#f3f3f5" }}>
+    <Heading>Trending Woofs</Heading>
+    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+      <View style={{ height: 120, flexDirection: 'row', paddingRight: 10, paddingLeft: 10 }}>
+        {data.woofs.map(woof => {
+          return (
+            <WoofCard key={woof.id} style={woofCardStyles.card} avatar={woof.avatar} name={woof.name} />
+          )
+        })}
+      </View>
+    </ScrollView>
+    <Heading>New Woof Posts</Heading>
+    {data.posts.map(post => {
+      return (
+        <WoofPost
+          key={post.id}
+          image={post.image}
+          title={post.title}
+          description={post.description}
+          caretaker={post.caretaker}
+          source={post.source}
+        />
+      )
+    })}
+  </ScrollView>
+);
+
+
+const ProjectsScreen = () => {
+  return (
+    <View>
+      <Text>Projects</Text>
+    </View>
+  )
+}
+
+const MessagesScreen = () => {
+  return (
+    <View>
+      <Text>Messages</Text>
+    </View>
+  )
+}
+
+const PaymentsScreen = () => {
+  return (
+    <View>
+      <Text>Payments</Text>
+    </View>
+  )
+}
 
 // Basic reusable components
+
+
+
 
 const Avatar = (props) => (
   <Image
@@ -71,38 +161,11 @@ const woofPostStyles = StyleSheet.create({
 
 let src = "https://images.unsplash.com/photo-1558947530-cbcf6e9aeeae?auto=format&fit=crop&w=634&q=80"
 // The screen rendering everything
-const HomeScreen = () => (
-  <ScrollView style={{ backgroundColor: "#f3f3f5" }}>
-    <Heading>Trending Woofs</Heading>
-    <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-      <View style={{ height: 120, flexDirection: 'row', paddingRight: 10, paddingLeft: 10 }}>
-        {data.woofs.map(woof => {
-          return (
-            <WoofCard key={woof.id} style={woofCardStyles.card} avatar={woof.avatar} name={woof.name} />
-          )
-        })}
-      </View>
-    </ScrollView>
-    <Heading>New Woof Posts</Heading>
-    {data.posts.map(post => {
-      return (
-        <WoofPost
-          key={post.id}
-          image={post.image}
-          title={post.title}
-          description={post.description}
-          caretaker={post.caretaker}
-          source={post.source}
-        />
-      )
-    })}
-  </ScrollView>
-);
 
 const App = () => (
-  <SafeAreaView style={{ flex: 1, backgroundColor: '#FAF9FA' }}>
-    <HomeScreen />
-  </SafeAreaView>
+  <NavigationContainer  >
+    <TabNavigation />
+  </NavigationContainer>
 );
 
 export default App;
