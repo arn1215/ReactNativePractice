@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Image, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 
 
@@ -15,19 +15,19 @@ const Tab = createBottomTabNavigator();
 const TabNavigation = () => {
   return (
     <Tab.Navigator screenOptions={{
-      
+      tabBarActiveTintColor: 'white',
       tabBarStyle: {
         backgroundColor: '#A3BAC3',
         color: 'white',
-        
+
       },
       headerShown: false
     }}
     >
-      <Tab.Screen name='Home' component={HomeScreen}  />
-      <Tab.Screen name='Projects' component={ProjectsScreen} />
-      <Tab.Screen name='Messages' component={MessagesScreen} />
-      <Tab.Screen name='Payments' component={PaymentsScreen} />
+      <Tab.Screen name='Home' component={HomeScreen} options={{ tabBarIcon: () => <Icon name='home' size={26} color='white' /> }} />
+      <Tab.Screen name='Projects' component={ProjectsScreen} options={{ tabBarIcon: () => <Icon name='pencil' size={24} color='white' /> }} />
+      <Tab.Screen name='Messages' component={MessagesScreen} options={{ tabBarIcon: () => <Icon name='envelope' size={24} color='white' /> }} />
+      <Tab.Screen name='Payments' component={PaymentsScreen} options={{ tabBarIcon: () => <Icon name='credit-card-alt' size={20} color='white' /> }} />
     </Tab.Navigator>
   )
 }
